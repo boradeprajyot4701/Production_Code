@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.1);
+            min-width: 60%;
+            max-width: 80%;
+        }
+        h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .info {
+            font-size: 28px;
+            margin: 15px 0;
+        }
+        .data {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4caf50;
+        }
+        #time {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Production Dashboard</h1>
+        <p class="info">Production Target: <span class="data" id="target">Loading...</span></p>
+        <p class="info">Today's Vehicle Count: <span class="data" id="todayCount">Loading...</span></p>
+        <p class="info">Total Vehicle Count: <span class="data" id="totalCount">Loading...</span></p>
+        <p class="info">Current Time: <span id="time">Loading...</span></p>
+    </div>
+
+    <script>
+        const sheetURL = "https://script.google.com/macros/s/AKfycbytSSeg08oM97QQRuLTvucZwditTdf2p235Xupi46dqjdRc4KFLmIqpwjdMYhjbfhMkTw/exec"; // Replace with your actual Google Apps Script URL
+
+        function updateTime() {
+            let now = new Date();
+            document.getElementById("time").innerText = now.toLocaleTimeString();
+        }
+
+        async function fetchSheetData() {
+            try {
+                let response = await fetch(sheetURL);
+                let data = await response.json();
+                document.getElementById("target").innerText = data.target;
+                document.getElementById("todayCount").innerText = data.todayCount;
+                document.getElementById("totalCount").innerText = data.totalCount;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        setInterval(updateTime, 1000); // Update time every second
+        setInterval(fetchSheetData, 5000); // Fetch new data every 5 seconds
+        fetchSheetData(); // Initial fetch
+        updateTime(); // Initial time update
+    </script>
+
+</body>
+</html>
+
