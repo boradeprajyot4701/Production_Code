@@ -23,51 +23,69 @@
             align-items: center;
             height: 100vh;
             width: 100vw;
-            flex-direction: column;
             overflow: hidden;
-            padding: 20px;
+            flex-direction: column;
+            position: relative;
         }
 
         #heading {
             font-size: 8vw;
             font-weight: bold;
             text-decoration: underline;
-            margin-bottom: 20px;
+            position: absolute;
+            top: 5%;
+            width: 100%;
+            text-align: center;
         }
 
-        #date, #time {
+        #date {
             font-size: 4vw;
             font-weight: bold;
             color: lightgreen;
+            position: absolute;
+            top: 15%;
+            left: 5%;
+            text-align: left;
+        }
+
+        #time {
+            font-size: 4vw;
+            font-weight: bold;
+            color: lightgreen;
+            position: absolute;
+            top: 15%;
+            right: 5%;
+            text-align: right;
         }
 
         .container {
             background: #1e1e1e;
-            padding: 5vh;
+            padding: 4vw;
             border-radius: 15px;
-            width: 100%;
-            max-width: 90%;
+            width: 90%;
+            max-width: 95%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            margin-top: 20vh;
         }
 
         .info {
-            font-size: 6vw;
-            margin: 3vh 0;
+            font-size: 5vw;
+            margin: 2vw 0;
         }
 
         .data {
-            font-size: 8vw;
+            font-size: 7vw;
             font-weight: bold;
             color: #8B0000;
         }
 
         .button {
-            margin-top: 5vh;
-            padding: 4vh 8vw;
-            font-size: 4vw;
+            margin-top: 2vw;
+            padding: 2vw 4vw;
+            font-size: 3vw;
             font-weight: bold;
             color: black;
             background-color: lightgreen;
@@ -75,7 +93,7 @@
             border-radius: 15px;
             cursor: pointer;
             transition: 0.3s;
-            display: none; /* Default: Hidden */
+            display: block;
         }
 
         .button:hover {
@@ -127,17 +145,6 @@
                 console.error("Error updating count:", error);
             }
         }
-
-        function detectDevice() {
-            let isAndroid = /android/i.test(navigator.userAgent);
-            let isSmallScreen = window.innerWidth < 768; // Small screens (phones & tablets)
-
-            if (isAndroid || isSmallScreen) {
-                document.getElementById("incrementBtn").style.display = "block"; // Show button on Android & small screens
-            }
-        }
-
-        window.onload = detectDevice;
 
         setInterval(updateTime, 500);
         setInterval(fetchSheetData, 500);
