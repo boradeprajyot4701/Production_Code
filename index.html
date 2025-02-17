@@ -60,28 +60,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 3vw; /* Increased space between number and buttons */
+            gap: 5vw; /* Increased space between number and buttons */
         }
 
         .data {
             font-size: 8vw;
             font-weight: bold;
-            color: white; /* Set number color to white */
-            text-shadow: 2px 2px 4px red, -2px -2px 4px red, 2px -2px 4px red, -2px 2px 4px red; /* Red outline effect on the digits */
+            color: white;
+            text-shadow: 2px 2px 4px red, -2px -2px 4px red, 2px -2px 4px red, -2px 2px 4px red;
         }
 
         .button {
-            padding: 1vw 3vw; /* Increased padding for more space around the buttons */
-            font-size: 5vw;
+            width: 10vw;
+            height: 10vw;
+            font-size: 6vw;
             font-weight: bold;
-            color: black;
+            color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
+            display: flex;
             justify-content: center;
+            align-items: center;
+            transition: 0.3s;
         }
 
         .increase {
@@ -94,11 +95,14 @@
 
         .decrease {
             background-color: red;
-            color: white;
         }
 
         .decrease:hover {
             background-color: darkred;
+        }
+
+        .button:focus {
+            outline: none;
         }
 
         /* Adjustments for smaller screens (tablets and phones) */
