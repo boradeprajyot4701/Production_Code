@@ -13,7 +13,6 @@
             box-sizing: border-box;
         }
 
-        /* Ensuring the body fills the entire screen */
         body {
             font-family: 'Eurostile', sans-serif;
             text-align: center;
@@ -22,35 +21,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Full height of the viewport */
-            width: 100vw; /* Full width of the viewport */
+            height: 100vh;
+            width: 100vw;
             flex-direction: column;
-            padding: 5vw; /* Padding to prevent content from touching edges */
             overflow: hidden;
+            padding: 20px;
         }
 
-        /* Styling the heading */
         #heading {
-            font-size: 10vw; /* Adjust font size based on viewport width */
+            font-size: 10vw; /* Adjusted font size for better scaling */
             font-weight: bold;
             text-decoration: underline;
-            margin-bottom: 5vh; /* Space below heading */
+            margin-bottom: 20px;
         }
 
-        /* Styling date and time */
         #date, #time {
-            font-size: 4vw; /* Smaller font for date and time */
+            font-size: 4vw; /* Reduced size for better scaling */
             font-weight: bold;
             color: lightgreen;
         }
 
-        /* Container for the main content */
         .container {
             background: #1e1e1e;
             padding: 5vh;
             border-radius: 15px;
             width: 100%;
-            max-width: 90%; /* Maximum width to keep things centered */
+            max-width: 90%; /* Maximum width to prevent overflow */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -58,23 +54,20 @@
             box-sizing: border-box;
         }
 
-        /* Styling for info sections (e.g., target, count) */
         .info {
-            font-size: 6vw; /* Scalable font size */
-            margin: 3vh 0; /* Vertical spacing between elements */
+            font-size: 6vw; /* Scalable font size for info */
+            margin: 3vh 0; /* Vertical spacing */
         }
 
-        /* Styling for data (target, today count, etc.) */
         .data {
-            font-size: 8vw; /* Scalable font size for data */
+            font-size: 8vw; /* Scalable data font size */
             font-weight: bold;
-            color: #8B0000; /* Red for numbers */
+            color: #8B0000;
         }
 
-        /* Button styling */
         .button {
             margin-top: 5vh;
-            padding: 3vh 6vw;
+            padding: 4vh 8vw;
             font-size: 4vw;
             font-weight: bold;
             color: black;
@@ -89,35 +82,35 @@
             background-color: #76b852;
         }
 
-        /* Media queries for smaller screens (like phones) */
+        /* Adjustments for smaller screens (tablets and phones) */
         @media (max-width: 768px) {
             #heading {
-                font-size: 12vw; /* Larger heading for smaller screens */
+                font-size: 12vw;
             }
             .info {
-                font-size: 8vw; /* Larger info text */
+                font-size: 8vw;
             }
             .data {
-                font-size: 10vw; /* Larger data numbers */
+                font-size: 10vw;
             }
             .button {
-                font-size: 5vw; /* Adjust button text size */
+                font-size: 5vw;
             }
         }
 
-        /* Media queries for extremely small screens (like phones in portrait) */
+        /* Additional adjustments for very small screens (portrait phones) */
         @media (max-width: 480px) {
             #heading {
-                font-size: 14vw; /* Even larger heading for small phones */
+                font-size: 14vw;
             }
             .info {
-                font-size: 10vw; /* Larger info text */
+                font-size: 10vw;
             }
             .data {
-                font-size: 12vw; /* Larger data numbers */
+                font-size: 12vw;
             }
             .button {
-                font-size: 6vw; /* Larger button text */
+                font-size: 6vw;
             }
         }
 
