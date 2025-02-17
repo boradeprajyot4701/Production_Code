@@ -24,44 +24,44 @@
             width: 100vw;
             overflow: hidden;
             flex-direction: column;
-            padding: 5vw; /* Makes content fit the screen */
+            padding: 5vw; /* Adds space around content */
         }
         #heading {
-            font-size: 10vw; /* Dynamic font size */
+            font-size: 6rem; /* Scalable font size */
             font-weight: bold;
             text-decoration: underline;
-            margin-bottom: 5vw; /* Space between heading and date/time */
+            margin-bottom: 4rem; /* Space between heading and date/time */
         }
         #date, #time {
-            font-size: 5vw; /* Adjusted for larger screens */
+            font-size: 3rem; /* Scalable font size */
             font-weight: bold;
             color: lightgreen;
         }
         .container {
             background: #1e1e1e;
-            padding: 4vw;
+            padding: 3rem;
             border-radius: 15px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 800px; /* Prevents excessive stretching */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 2vw;
+            margin-top: 2rem;
         }
         .info {
-            font-size: 5vw; /* Dynamic font size */
-            margin: 3vw 0;
+            font-size: 4rem; /* Scalable font size */
+            margin: 2rem 0;
         }
         .data {
-            font-size: 8vw; /* Dynamic font size */
+            font-size: 6rem; /* Scalable font size */
             font-weight: bold;
             color: #8B0000; /* Red for numbers */
         }
         .button {
-            margin-top: 4vw;
-            padding: 2vw 5vw;
-            font-size: 4vw;
+            margin-top: 3rem;
+            padding: 2rem 4rem;
+            font-size: 2rem;
             font-weight: bold;
             color: black;
             background-color: lightgreen;
@@ -74,19 +74,35 @@
             background-color: #76b852;
         }
 
-        /* Ensuring responsive layout for large screens */
-        @media (max-width: 1200px) {
+        /* Responsiveness for smaller screens (laptops) */
+        @media (max-width: 1024px) {
             #heading {
-                font-size: 12vw;
+                font-size: 5rem;
             }
             .info {
-                font-size: 4vw;
+                font-size: 3.5rem;
             }
             .data {
-                font-size: 6vw;
+                font-size: 5rem;
             }
             .button {
-                font-size: 3vw;
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Responsiveness for very large screens (TVs) */
+        @media (min-width: 1600px) {
+            #heading {
+                font-size: 8rem;
+            }
+            .info {
+                font-size: 5rem;
+            }
+            .data {
+                font-size: 8rem;
+            }
+            .button {
+                font-size: 3rem;
             }
         }
     </style>
