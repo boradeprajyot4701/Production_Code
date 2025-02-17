@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production Dashboard</title>
     <style>
-        @import url('https://fonts.cdnfonts.com/css/eurostile');
+        @import url('https://fonts.cdnfonts.com/css/eurostile'); /* Import Eurostile font */
 
         * {
             margin: 0;
@@ -23,69 +23,52 @@
             align-items: center;
             height: 100vh;
             width: 100vw;
-            overflow: hidden;
             flex-direction: column;
-            position: relative;
+            overflow: hidden;
+            padding: 20px;
         }
 
         #heading {
-            font-size: 8vw;
+            font-size: 10vw; /* Adjusted font size for better scaling */
             font-weight: bold;
             text-decoration: underline;
-            position: absolute;
-            top: 5%;
-            width: 100%;
-            text-align: center;
+            margin-bottom: 20px;
         }
 
-        #date {
-            font-size: 4vw;
+        #date, #time {
+            font-size: 4vw; /* Reduced size for better scaling */
             font-weight: bold;
             color: lightgreen;
-            position: absolute;
-            top: 15%;
-            left: 5%;
-            text-align: left;
-        }
-
-        #time {
-            font-size: 4vw;
-            font-weight: bold;
-            color: lightgreen;
-            position: absolute;
-            top: 15%;
-            right: 5%;
-            text-align: right;
         }
 
         .container {
             background: #1e1e1e;
-            padding: 4vw;
+            padding: 5vh;
             border-radius: 15px;
-            width: 90%;
-            max-width: 95%;
+            width: 100%;
+            max-width: 90%; /* Maximum width to prevent overflow */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 20vh;
+            box-sizing: border-box;
         }
 
         .info {
-            font-size: 5vw;
-            margin: 2vw 0;
+            font-size: 6vw; /* Scalable font size for info */
+            margin: 3vh 0; /* Vertical spacing */
         }
 
         .data {
-            font-size: 7vw;
+            font-size: 8vw; /* Scalable data font size */
             font-weight: bold;
             color: #8B0000;
         }
 
         .button {
-            margin-top: 2vw;
-            padding: 2vw 4vw;
-            font-size: 3vw;
+            margin-top: 5vh;
+            padding: 4vh 8vw;
+            font-size: 4vw;
             font-weight: bold;
             color: black;
             background-color: lightgreen;
@@ -93,12 +76,44 @@
             border-radius: 15px;
             cursor: pointer;
             transition: 0.3s;
-            display: block;
         }
 
         .button:hover {
             background-color: #76b852;
         }
+
+        /* Adjustments for smaller screens (tablets and phones) */
+        @media (max-width: 768px) {
+            #heading {
+                font-size: 12vw;
+            }
+            .info {
+                font-size: 8vw;
+            }
+            .data {
+                font-size: 10vw;
+            }
+            .button {
+                font-size: 5vw;
+            }
+        }
+
+        /* Additional adjustments for very small screens (portrait phones) */
+        @media (max-width: 480px) {
+            #heading {
+                font-size: 14vw;
+            }
+            .info {
+                font-size: 10vw;
+            }
+            .data {
+                font-size: 12vw;
+            }
+            .button {
+                font-size: 6vw;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -111,7 +126,7 @@
         <p class="info">Prod. Target: <span class="data" id="target">Loading...</span></p>
         <p class="info">Today's Count: <span class="data" id="todayCount">Loading...</span></p>
         <p class="info">Total Count: <span class="data" id="totalCount">Loading...</span></p>
-        <button class="button" id="incrementBtn" onclick="incrementCount()">+ Increase Count</button>
+        <button class="button" onclick="incrementCount()">+ Increase Count</button>
     </div>
 
     <script>
@@ -139,15 +154,15 @@
 
         async function incrementCount() {
             try {
-                await fetch(updateURL);
-                fetchSheetData();
+                await fetch(updateURL); // Uses GET request
+                fetchSheetData(); // Refresh data after updating count
             } catch (error) {
                 console.error("Error updating count:", error);
             }
         }
 
-        setInterval(updateTime, 500);
-        setInterval(fetchSheetData, 500);
+        setInterval(updateTime, 500); // Update time every second
+        setInterval(fetchSheetData, 500); // Fetch new data every 5 seconds
         fetchSheetData();
         updateTime();
     </script>
