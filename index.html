@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Production Dashboard</title>
     <style>
-        @import url('https://fonts.cdnfonts.com/css/eurostile'); /* Import Eurostile font */
+        @import url('https://fonts.cdnfonts.com/css/eurostile');
 
         * {
             margin: 0;
@@ -29,7 +29,7 @@
         }
 
         #heading {
-            font-size: 10vw; /* Adjusted for responsiveness */
+            font-size: 8vw;
             font-weight: bold;
             text-decoration: underline;
             margin-bottom: 20px;
@@ -75,15 +75,15 @@
             border-radius: 15px;
             cursor: pointer;
             transition: 0.3s;
-            display: none; /* Hide button by default */
+            display: none; /* Default: hidden */
         }
 
         .button:hover {
             background-color: #76b852;
         }
 
-        /* Ensure button remains hidden on large screens (TVs) */
-        @media (min-width: 1200px) {
+        /* Hide button on large screens (TVs and PCs) */
+        @media (min-width: 1024px) {
             .button {
                 display: none !important;
             }
@@ -136,18 +136,16 @@
             }
         }
 
-        // Detect if device is an Android phone
         function detectDevice() {
             let userAgent = navigator.userAgent || navigator.vendor || window.opera;
             let isAndroid = /android/i.test(userAgent);
-            let isMobile = window.innerWidth < 768; // Mobile devices usually have width < 768px
+            let isSmallScreen = window.innerWidth < 1024; // Small screens (phones)
 
-            if (isAndroid && isMobile) {
-                document.getElementById("incrementBtn").style.display = "block"; // Show button
+            if (isAndroid && isSmallScreen) {
+                document.getElementById("incrementBtn").style.display = "block"; // Show button on Android phones
             }
         }
 
-        // Run detection on load
         detectDevice();
 
         setInterval(updateTime, 500);
