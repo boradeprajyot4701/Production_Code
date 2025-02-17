@@ -29,14 +29,14 @@
         }
 
         #heading {
-            font-size: 10vw; /* Adjusted font size for better scaling */
+            font-size: 10vw; /* Adjusted for responsiveness */
             font-weight: bold;
             text-decoration: underline;
             margin-bottom: 20px;
         }
 
         #date, #time {
-            font-size: 4vw; /* Reduced size for better scaling */
+            font-size: 4vw;
             font-weight: bold;
             color: lightgreen;
         }
@@ -46,21 +46,20 @@
             padding: 5vh;
             border-radius: 15px;
             width: 100%;
-            max-width: 90%; /* Maximum width to prevent overflow */
+            max-width: 90%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-sizing: border-box;
         }
 
         .info {
-            font-size: 6vw; /* Scalable font size for info */
-            margin: 3vh 0; /* Vertical spacing */
+            font-size: 6vw;
+            margin: 3vh 0;
         }
 
         .data {
-            font-size: 8vw; /* Scalable data font size */
+            font-size: 8vw;
             font-weight: bold;
             color: #8B0000;
         }
@@ -76,41 +75,17 @@
             border-radius: 15px;
             cursor: pointer;
             transition: 0.3s;
+            display: none; /* Hide button by default */
         }
 
         .button:hover {
             background-color: #76b852;
         }
 
-        /* Adjustments for smaller screens (tablets and phones) */
-        @media (max-width: 768px) {
-            #heading {
-                font-size: 12vw;
-            }
-            .info {
-                font-size: 8vw;
-            }
-            .data {
-                font-size: 10vw;
-            }
+        /* Ensure button remains hidden on large screens (TVs) */
+        @media (min-width: 1200px) {
             .button {
-                font-size: 5vw;
-            }
-        }
-
-        /* Additional adjustments for very small screens (portrait phones) */
-        @media (max-width: 480px) {
-            #heading {
-                font-size: 14vw;
-            }
-            .info {
-                font-size: 10vw;
-            }
-            .data {
-                font-size: 12vw;
-            }
-            .button {
-                font-size: 6vw;
+                display: none !important;
             }
         }
 
@@ -126,7 +101,7 @@
         <p class="info">Prod. Target: <span class="data" id="target">Loading...</span></p>
         <p class="info">Today's Count: <span class="data" id="todayCount">Loading...</span></p>
         <p class="info">Total Count: <span class="data" id="totalCount">Loading...</span></p>
-        <button class="button" onclick="incrementCount()">+ Increase Count</button>
+        <button class="button" id="incrementBtn" onclick="incrementCount()">+ Increase Count</button>
     </div>
 
     <script>
@@ -154,15 +129,29 @@
 
         async function incrementCount() {
             try {
-                await fetch(updateURL); // Uses GET request
-                fetchSheetData(); // Refresh data after updating count
+                await fetch(updateURL);
+                fetchSheetData();
             } catch (error) {
                 console.error("Error updating count:", error);
             }
         }
 
-        setInterval(updateTime, 500); // Update time every second
-        setInterval(fetchSheetData, 500); // Fetch new data every 5 seconds
+        // Detect if device is an Android phone
+        function detectDevice() {
+            let userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            let isAndroid = /android/i.test(userAgent);
+            let isMobile = window.innerWidth < 768; // Mobile devices usually have width < 768px
+
+            if (isAndroid && isMobile) {
+                document.getElementById("incrementBtn").style.display = "block"; // Show button
+            }
+        }
+
+        // Run detection on load
+        detectDevice();
+
+        setInterval(updateTime, 500);
+        setInterval(fetchSheetData, 500);
         fetchSheetData();
         updateTime();
     </script>
