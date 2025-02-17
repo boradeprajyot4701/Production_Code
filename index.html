@@ -74,6 +74,21 @@
             font-weight: bold;
             color: #8B0000; /* Red for numbers */
         }
+        .button {
+            margin-top: 20px;
+            padding: 20px 40px;
+            font-size: 50px;
+            font-weight: bold;
+            color: black;
+            background-color: lightgreen;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .button:hover {
+            background-color: #76b852;
+        }
     </style>
 </head>
 <body>
@@ -86,14 +101,16 @@
         <p class="info">Prod. Target: <span class="data" id="target">Loading...</span></p>
         <p class="info">Today's Count: <span class="data" id="todayCount">Loading...</span></p>
         <p class="info">Total Count: <span class="data" id="totalCount">Loading...</span></p>
+        <button class="button" onclick="incrementCount()">+ Increase Count</button>
     </div>
 
     <script>
-        const sheetURL = "https://script.google.com/macros/s/AKfycbytSSeg08oM97QQRuLTvucZwditTdf2p235Xupi46dqjdRc4KFLmIqpwjdMYhjbfhMkTw/exec"; // Replace with your actual Google Apps Script URL
+        const sheetURL = "https://script.google.com/macros/s/AKfycbwzIW8pvsPZwha0PpCkOmEFI-knkQS4SwLmqUxPMfAgQ0pHkcp_JTOACHewt8kcRKhk/exec"; 
+        const updateURL = "https://script.google.com/macros/s/AKfycbwzIW8pvsPZwha0PpCkOmEFI-knkQS4SwLmqUxPMfAgQ0pHkcp_JTOACHewt8kcRKhk/exec?action=increment";
 
         function updateTime() {
             let now = new Date();
-            let options = { day: 'numeric', month: 'long', year: 'numeric' }; // Format: 14 February 2025
+            let options = { day: 'numeric', month: 'long', year: 'numeric' };
             document.getElementById("time").innerText = now.toLocaleTimeString();
             document.getElementById("date").innerText = now.toLocaleDateString(undefined, options);
         }
@@ -110,10 +127,19 @@
             }
         }
 
+        async function incrementCount() {
+            try {
+                await fetch(updateURL, { method: "POST" });
+                fetchSheetData();
+            } catch (error) {
+                console.error("Error updating count:", error);
+            }
+        }
+
         setInterval(updateTime, 1000); // Update time every second
-        setInterval(fetchSheetData, 500); // Fetch new data every 5 seconds
-        fetchSheetData(); // Initial fetch
-        updateTime(); // Initial time update
+        setInterval(fetchSheetData, 5000); // Fetch new data every 5 seconds
+        fetchSheetData();
+        updateTime();
     </script>
 
 </body>
