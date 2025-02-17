@@ -16,10 +16,7 @@
         body {
             font-family: 'Eurostile', sans-serif;
             text-align: center;
-            /* Changed to background image */
-            background-image: url('https://github.com/boradeprajyot4701/Production_Code/blob/main/Screenshot%202025-02-17%20180443.jpg'); /* Replace with your image URL */
-            background-size: cover; /* or contain, depending on your preference */
-            background-repeat: no-repeat;
+            background-color: #1E1E1E;
             color: white;
             display: flex;
             justify-content: center;
@@ -31,15 +28,11 @@
             padding: 20px;
         }
 
-        /* Replaced heading text with image */
         #heading {
-            width: 300px; /* Adjust width as needed */
-            height: auto; /* Maintain aspect ratio */
+            font-size: 10vw;
+            font-weight: bold;
+            text-decoration: underline;
             margin-bottom: 20px;
-        }
-        #heading img {
-            max-width: 100%;
-            height: auto;
         }
 
         #date, #time {
@@ -49,7 +42,7 @@
         }
 
         .container {
-            background: rgba(30, 30, 30, 0.7); /* Added semi-transparent background */
+            background: #1e1e1e;
             padding: 5vh;
             border-radius: 15px;
             width: 100%;
@@ -67,7 +60,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2vw;
+            gap: 2vw; /* Reduced space between number and buttons */
         }
 
         .data {
@@ -77,28 +70,143 @@
             text-shadow: 2px 2px 4px red, -2px -2px 4px red, 2px -2px 4px red, -2px 2px 4px red;
         }
 
-        .button { /* ... (rest of your button styles) */ }
-        .increase { /* ... */ }
-        .increase:hover { /* ... */ }
-        .decrease { /* ... */ }
-        .decrease:hover { /* ... */ }
-        .button:focus { /* ... */ }
+        .button {
+            width: 6vw;
+            height: 6vw;
+            font-size: 4vw;
+            font-weight: bold;
+            color: white;
+            background-color: transparent;
+            border: none; /* Removed red outline */
+            border-radius: 0%; /* Square shape */
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.3s;
+        }
 
-        /* ... (rest of your media query styles) */
+        .increase {
+            color: lightgreen;
+        }
+
+        .increase:hover {
+            background-color: lightgreen;
+            color: black;
+        }
+
+        .decrease {
+            color: red;
+        }
+
+        .decrease:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        /* Adjustments for smaller screens (tablets and phones) */
+        @media (max-width: 768px) {
+            #heading {
+                font-size: 12vw;
+            }
+            .info {
+                font-size: 8vw;
+            }
+            .data {
+                font-size: 10vw;
+            }
+            .button {
+                font-size: 6vw;
+                padding: 1.5vw 3vw;
+            }
+        }
+
+        /* Additional adjustments for very small screens (portrait phones) */
+        @media (max-width: 480px) {
+            #heading {
+                font-size: 14vw;
+            }
+            .info {
+                font-size: 10vw;
+            }
+            .data {
+                font-size: 12vw;
+            }
+            .button {
+                font-size: 7vw;
+                padding: 2vw 4vw;
+            }
+        }
 
     </style>
 </head>
 <body>
 
-    <div id="heading">
-        <img src="your_image_url_here.png" alt="Revamp Moto Logo">  </div> <span id="date">Loading...</span>
+    <span id="heading">REVAMP MOTO</span>
+    <span id="date">Loading...</span>
     <span id="time">Loading...</span>
 
     <div class="container">
-       </div>
+        <p class="info">Prod. Target: <span class="data" id="target">Loading...</span></p>
+        <p class="info">
+            Today's Count: 
+            <button class="button decrease" onclick="decrementCount()">−</button>
+            <span class="data" id="todayCount">Loading...</span>
+            <button class="button increase" onclick="incrementCount()">+</button>
+        </p>
+        <p class="info">Total Count: <span class="data" id="totalCount">Loading...</span></p>
+    </div>
 
     <script>
-        // ... (your JavaScript code remains the same)
+        const sheetURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec"; 
+        const increaseURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec?action=increment";
+        const decreaseURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec?action=decrement";
+
+        function updateTime() {
+            let now = new Date();
+            let options = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById("time").innerText = now.toLocaleTimeString();
+            document.getElementById("date").innerText = now.toLocaleDateString(undefined, options);
+        }
+
+        async function fetchSheetData() {
+            try {
+                let response = await fetch(sheetURL);
+                let data = await response.json();
+                document.getElementById("target").innerText = data.target;
+                document.getElementById("todayCount").innerText = data.todayCount;
+                document.getElementById("totalCount").innerText = data.totalCount;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        async function incrementCount() {
+            try {
+                await fetch(increaseURL);
+                fetchSheetData();
+            } catch (error) {
+                console.error("Error updating count:", error);
+            }
+        }
+
+        async function decrementCount() {
+            try {
+                await fetch(decreaseURL);
+                fetchSheetData();
+            } catch (error) {
+                console.error("Error decreasing count:", error);
+            }
+        }
+
+        setInterval(updateTime, 500);
+        setInterval(fetchSheetData, 500);
+        fetchSheetData();
+        updateTime();
     </script>
 
 </body>
