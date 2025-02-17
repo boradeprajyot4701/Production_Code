@@ -127,14 +127,14 @@
             }
         }
 
-        async function incrementCount() {
-            try {
-                await fetch(updateURL, { method: "POST" });
-                fetchSheetData();
-            } catch (error) {
-                console.error("Error updating count:", error);
-            }
-        }
+async function incrementCount() {
+    try {
+        await fetch(updateURL); // Uses GET request
+        fetchSheetData(); // Refresh data after updating count
+    } catch (error) {
+        console.error("Error updating count:", error);
+    }
+}
 
         setInterval(updateTime, 1000); // Update time every second
         setInterval(fetchSheetData, 5000); // Fetch new data every 5 seconds
