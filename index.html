@@ -60,7 +60,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5vw; /* Increased space between number and buttons */
+            gap: 2vw; /* Reduced space between number and buttons */
         }
 
         .data {
@@ -71,13 +71,14 @@
         }
 
         .button {
-            width: 10vw;
-            height: 10vw;
-            font-size: 6vw;
+            width: 6vw;
+            height: 6vw;
+            font-size: 4vw;
             font-weight: bold;
             color: white;
-            border: none;
-            border-radius: 50%;
+            border: 2px solid #8B0000; /* Red contrast outline */
+            background-color: transparent;
+            border-radius: 0%;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -86,19 +87,21 @@
         }
 
         .increase {
-            background-color: lightgreen;
+            color: lightgreen;
         }
 
         .increase:hover {
-            background-color: #76b852;
+            background-color: lightgreen;
+            color: black;
         }
 
         .decrease {
-            background-color: red;
+            color: red;
         }
 
         .decrease:hover {
-            background-color: darkred;
+            background-color: red;
+            color: white;
         }
 
         .button:focus {
