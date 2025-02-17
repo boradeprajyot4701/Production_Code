@@ -75,20 +75,12 @@
             border-radius: 15px;
             cursor: pointer;
             transition: 0.3s;
-            display: none; /* Default: hidden */
+            display: none; /* Default: Hidden */
         }
 
         .button:hover {
             background-color: #76b852;
         }
-
-        /* Hide button on large screens (TVs and PCs) */
-        @media (min-width: 1024px) {
-            .button {
-                display: none !important;
-            }
-        }
-
     </style>
 </head>
 <body>
@@ -137,16 +129,15 @@
         }
 
         function detectDevice() {
-            let userAgent = navigator.userAgent || navigator.vendor || window.opera;
-            let isAndroid = /android/i.test(userAgent);
-            let isSmallScreen = window.innerWidth < 1024; // Small screens (phones)
+            let isAndroid = /android/i.test(navigator.userAgent);
+            let isSmallScreen = window.innerWidth < 768; // Small screens (phones & tablets)
 
-            if (isAndroid && isSmallScreen) {
-                document.getElementById("incrementBtn").style.display = "block"; // Show button on Android phones
+            if (isAndroid || isSmallScreen) {
+                document.getElementById("incrementBtn").style.display = "block"; // Show button on Android & small screens
             }
         }
 
-        detectDevice();
+        window.onload = detectDevice;
 
         setInterval(updateTime, 500);
         setInterval(fetchSheetData, 500);
