@@ -74,7 +74,6 @@
             font-size: 5vw;
             font-weight: bold;
             color: black;
-            background-color: lightgreen;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -84,8 +83,21 @@
             justify-content: center;
         }
 
-        .button:hover {
+        .increase {
+            background-color: lightgreen;
+        }
+
+        .increase:hover {
             background-color: #76b852;
+        }
+
+        .decrease {
+            background-color: red;
+            color: white;
+        }
+
+        .decrease:hover {
+            background-color: darkred;
         }
 
         /* Adjustments for smaller screens (tablets and phones) */
@@ -134,15 +146,17 @@
         <p class="info">Prod. Target: <span class="data" id="target">Loading...</span></p>
         <p class="info">
             Today's Count: 
+            <button class="button decrease" onclick="decrementCount()">−</button>
             <span class="data" id="todayCount">Loading...</span>
-            <button class="button" onclick="incrementCount()">+</button>
+            <button class="button increase" onclick="incrementCount()">+</button>
         </p>
         <p class="info">Total Count: <span class="data" id="totalCount">Loading...</span></p>
     </div>
 
     <script>
         const sheetURL = "https://script.google.com/macros/s/AKfycbxsD9ajjTKT3chhBk1qG0ixVDYuT98pUtsPD4yE7OxXzbgmo0CrBc8IFn2Rxv-b6SR5MQ/exec"; 
-        const updateURL = "https://script.google.com/macros/s/AKfycbxsD9ajjTKT3chhBk1qG0ixVDYuT98pUtsPD4yE7OxXzbgmo0CrBc8IFn2Rxv-b6SR5MQ/exec?action=increment";
+        const increaseURL = "https://script.google.com/macros/s/AKfycbxsD9ajjTKT3chhBk1qG0ixVDYuT98pUtsPD4yE7OxXzbgmo0CrBc8IFn2Rxv-b6SR5MQ/exec?action=increment";
+        const decreaseURL = "https://script.google.com/macros/s/AKfycbxsD9ajjTKT3chhBk1qG0ixVDYuT98pUtsPD4yE7OxXzbgmo0CrBc8IFn2Rxv-b6SR5MQ/exec?action=decrement";
 
         function updateTime() {
             let now = new Date();
@@ -165,10 +179,19 @@
 
         async function incrementCount() {
             try {
-                await fetch(updateURL);
+                await fetch(increaseURL);
                 fetchSheetData();
             } catch (error) {
                 console.error("Error updating count:", error);
+            }
+        }
+
+        async function decrementCount() {
+            try {
+                await fetch(decreaseURL);
+                fetchSheetData();
+            } catch (error) {
+                console.error("Error decreasing count:", error);
             }
         }
 
