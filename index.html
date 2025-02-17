@@ -24,60 +24,44 @@
             width: 100vw;
             overflow: hidden;
             flex-direction: column;
-            position: relative;
+            padding: 5vw; /* Makes content fit the screen */
         }
         #heading {
-            font-size: 100px;
+            font-size: 10vw; /* Dynamic font size */
             font-weight: bold;
             text-decoration: underline;
-            position: absolute;
-            top: 20px;
-            width: 100%;
-            text-align: center;
+            margin-bottom: 5vw; /* Space between heading and date/time */
         }
-        #date {
-            font-size: 60px;
+        #date, #time {
+            font-size: 5vw; /* Adjusted for larger screens */
             font-weight: bold;
             color: lightgreen;
-            position: absolute;
-            top: 160px;
-            left: 50px;
-            text-align: left;
-        }
-        #time {
-            font-size: 60px;
-            font-weight: bold;
-            color: lightgreen;
-            position: absolute;
-            top: 160px;
-            right: 50px;
-            text-align: right;
         }
         .container {
             background: #1e1e1e;
-            padding: 60px;
+            padding: 4vw;
             border-radius: 15px;
-            width: 80%;
-            max-width: 90%;
+            width: 100%;
+            max-width: 1000px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 200px;
+            margin-top: 2vw;
         }
         .info {
-            font-size: 100px;
-            margin: 25px 0;
+            font-size: 5vw; /* Dynamic font size */
+            margin: 3vw 0;
         }
         .data {
-            font-size: 200px;
+            font-size: 8vw; /* Dynamic font size */
             font-weight: bold;
             color: #8B0000; /* Red for numbers */
         }
         .button {
-            margin-top: 20px;
-            padding: 20px 40px;
-            font-size: 50px;
+            margin-top: 4vw;
+            padding: 2vw 5vw;
+            font-size: 4vw;
             font-weight: bold;
             color: black;
             background-color: lightgreen;
@@ -88,6 +72,22 @@
         }
         .button:hover {
             background-color: #76b852;
+        }
+
+        /* Ensuring responsive layout for large screens */
+        @media (max-width: 1200px) {
+            #heading {
+                font-size: 12vw;
+            }
+            .info {
+                font-size: 4vw;
+            }
+            .data {
+                font-size: 6vw;
+            }
+            .button {
+                font-size: 3vw;
+            }
         }
     </style>
 </head>
@@ -127,14 +127,14 @@
             }
         }
 
-async function incrementCount() {
-    try {
-        await fetch(updateURL); // Uses GET request
-        fetchSheetData(); // Refresh data after updating count
-    } catch (error) {
-        console.error("Error updating count:", error);
-    }
-}
+        async function incrementCount() {
+            try {
+                await fetch(updateURL); // Uses GET request
+                fetchSheetData(); // Refresh data after updating count
+            } catch (error) {
+                console.error("Error updating count:", error);
+            }
+        }
 
         setInterval(updateTime, 500); // Update time every second
         setInterval(fetchSheetData, 500); // Fetch new data every 5 seconds
