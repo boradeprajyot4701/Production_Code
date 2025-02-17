@@ -24,44 +24,46 @@
             width: 100vw;
             overflow: hidden;
             flex-direction: column;
-            padding: 5vw; /* Adds space around content */
+            padding: 5vw;
+            height: 100%; /* Occupy full height of the viewport */
         }
         #heading {
-            font-size: 6rem; /* Scalable font size */
+            font-size: 10vw; /* Scale to 10% of viewport width */
             font-weight: bold;
             text-decoration: underline;
-            margin-bottom: 4rem; /* Space between heading and date/time */
+            margin-bottom: 4vh; /* Space between heading and date/time */
         }
         #date, #time {
-            font-size: 3rem; /* Scalable font size */
+            font-size: 5vw; /* Scale to 5% of viewport width */
             font-weight: bold;
             color: lightgreen;
         }
         .container {
             background: #1e1e1e;
-            padding: 3rem;
+            padding: 5vh;
             border-radius: 15px;
             width: 100%;
-            max-width: 800px; /* Prevents excessive stretching */
+            max-width: 100%; /* Ensure it takes full width */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin-top: 2rem;
+            margin-top: 5vh;
+            box-sizing: border-box;
         }
         .info {
-            font-size: 4rem; /* Scalable font size */
-            margin: 2rem 0;
+            font-size: 6vw; /* Scalable font size */
+            margin: 2vh 0;
         }
         .data {
-            font-size: 6rem; /* Scalable font size */
+            font-size: 8vw; /* Scalable font size */
             font-weight: bold;
             color: #8B0000; /* Red for numbers */
         }
         .button {
-            margin-top: 3rem;
-            padding: 2rem 4rem;
-            font-size: 2rem;
+            margin-top: 5vh;
+            padding: 3vh 6vw;
+            font-size: 3vw;
             font-weight: bold;
             color: black;
             background-color: lightgreen;
@@ -74,37 +76,22 @@
             background-color: #76b852;
         }
 
-        /* Responsiveness for smaller screens (laptops) */
-        @media (max-width: 1024px) {
+        /* Optional: Fix for extremely small screens */
+        @media (max-width: 480px) {
             #heading {
-                font-size: 5rem;
+                font-size: 12vw; /* Adjust for smaller screens */
             }
             .info {
-                font-size: 3.5rem;
+                font-size: 8vw;
             }
             .data {
-                font-size: 5rem;
+                font-size: 10vw;
             }
             .button {
-                font-size: 1.8rem;
+                font-size: 4vw;
             }
         }
 
-        /* Responsiveness for very large screens (TVs) */
-        @media (min-width: 1600px) {
-            #heading {
-                font-size: 8rem;
-            }
-            .info {
-                font-size: 5rem;
-            }
-            .data {
-                font-size: 8rem;
-            }
-            .button {
-                font-size: 3rem;
-            }
-        }
     </style>
 </head>
 <body>
