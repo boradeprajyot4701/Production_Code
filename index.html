@@ -35,10 +35,24 @@
             margin-bottom: 20px;
         }
 
-        #date, #time {
+        .date-time-container {
+            display: flex;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 800px;
             font-size: 4vw;
             font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        #date {
             color: lightgreen;
+            text-align: left;
+        }
+
+        #time {
+            color: lightgreen;
+            text-align: right;
         }
 
         .container {
@@ -60,7 +74,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2vw; /* Reduced space between number and buttons */
+            gap: 2vw;
         }
 
         .data {
@@ -77,8 +91,8 @@
             font-weight: bold;
             color: white;
             background-color: transparent;
-            border: none; /* Removed red outline */
-            border-radius: 0%; /* Square shape */
+            border: none;
+            border-radius: 0%;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -108,7 +122,7 @@
             outline: none;
         }
 
-        /* Adjustments for smaller screens (tablets and phones) */
+        /* Adjustments for smaller screens */
         @media (max-width: 768px) {
             #heading {
                 font-size: 12vw;
@@ -125,7 +139,6 @@
             }
         }
 
-        /* Additional adjustments for very small screens (portrait phones) */
         @media (max-width: 480px) {
             #heading {
                 font-size: 14vw;
@@ -140,6 +153,12 @@
                 font-size: 7vw;
                 padding: 2vw 4vw;
             }
+
+            .date-time-container {
+                font-size: 5vw;
+                width: 100%;
+                padding: 0 5vw;
+            }
         }
 
     </style>
@@ -147,8 +166,11 @@
 <body>
 
     <span id="heading">REVAMP MOTO</span>
-    <span id="date">Loading...</span>
-    <span id="time">Loading...</span>
+
+    <div class="date-time-container">
+        <span id="date">Loading...</span>
+        <span id="time">Loading...</span>
+    </div>
 
     <div class="container">
         <p class="info">Prod. Target: <span class="data" id="target">Loading...</span></p>
