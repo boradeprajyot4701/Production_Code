@@ -28,10 +28,10 @@
             padding: 20px;
         }
 
-        #heading {
-            font-size: 10vw;
-            font-weight: bold;
-            text-decoration: underline;
+        /* Styling for the heading image */
+        #heading-img {
+            width: 60%;
+            max-width: 500px;
             margin-bottom: 20px;
         }
 
@@ -45,14 +45,8 @@
             margin-bottom: 20px;
         }
 
-        #date {
+        #date, #time {
             color: lightgreen;
-            text-align: left;
-        }
-
-        #time {
-            color: lightgreen;
-            text-align: right;
         }
 
         .container {
@@ -65,7 +59,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-sizing: border-box;
         }
 
         .info {
@@ -92,7 +85,6 @@
             color: white;
             background-color: transparent;
             border: none;
-            border-radius: 0%;
             cursor: pointer;
             display: flex;
             justify-content: center;
@@ -118,15 +110,8 @@
             color: white;
         }
 
-        .button:focus {
-            outline: none;
-        }
-
         /* Adjustments for smaller screens */
         @media (max-width: 768px) {
-            #heading {
-                font-size: 12vw;
-            }
             .info {
                 font-size: 8vw;
             }
@@ -135,14 +120,10 @@
             }
             .button {
                 font-size: 6vw;
-                padding: 1.5vw 3vw;
             }
         }
 
         @media (max-width: 480px) {
-            #heading {
-                font-size: 14vw;
-            }
             .info {
                 font-size: 10vw;
             }
@@ -151,9 +132,7 @@
             }
             .button {
                 font-size: 7vw;
-                padding: 2vw 4vw;
             }
-
             .date-time-container {
                 font-size: 5vw;
                 width: 100%;
@@ -165,7 +144,8 @@
 </head>
 <body>
 
-    <span id="heading">REVAMP MOTO</span>
+    <!-- Replacing text heading with an image -->
+    <img id="heading-img" src="images/Group 4327.png" alt="Revamp Moto Logo">
 
     <div class="date-time-container">
         <span id="date">Loading...</span>
@@ -233,4 +213,3 @@
 
 </body>
 </html>
-
