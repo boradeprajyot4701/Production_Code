@@ -18,106 +18,94 @@
             background-color: #1E1E1E;
             color: white;
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             height: 100vh;
             width: 100vw;
-            flex-direction: column;
             overflow: hidden;
             padding: 20px;
         }
 
-        /* Header with Date, Logo, and Time */
+        /* Header */
         #heading-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 90%;
-            max-width: 800px;
-            margin-bottom: 20px;
+            max-width: 1400px;
+            margin-bottom: 30px;
         }
 
         #heading-img {
-            width: 60%;
+            width: 30%;
             max-width: 500px;
         }
 
         #date, #time {
             color: #FFD323;
-            font-size: 2vw;
+            font-size: 2.5vw;
             font-weight: bold;
         }
 
-        /* Main Container aligned left */
+        /* Main Content */
         .container {
-            background: #1e1e1e;
+            background: #1E1E1E;
             padding: 5vh;
             border-radius: 15px;
             width: 90%;
-            max-width: 800px;
+            max-width: 1200px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
         .info {
-            font-size: 2vw;
-            margin: 2vh 0;
+            font-size: 2.5vw;
+            margin: 3vh 0;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            gap: 2vw;
-            width: 100%;
         }
 
         .data {
-            font-size: 4vw;
+            font-size: 4.5vw;
             font-weight: bold;
             color: #FFD323;
             display: block;
         }
 
+        /* Button Styling */
         .button {
-            width: 4vw;
-            height: 4vw;
-            font-size: 2vw;
+            width: 5vw;
+            height: 5vw;
+            font-size: 3vw;
             font-weight: bold;
             color: white;
-            background-color: transparent;
+            background-color: #FFD323;
+            border-radius: 50%;
             border: none;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
             transition: 0.3s;
+            margin: 10px;
         }
 
-        .increase {
+        .button:hover {
+            background-color: white;
             color: #FFD323;
         }
 
-        .increase:hover {
-            background-color: #FFD323;
-            color: white;
-        }
-
-        .decrease {
-            color: #FFD323;
-        }
-
-        .decrease:hover {
-            background-color: #FFD323;
-            color: white;
-        }
-
-        /* Vertical Mascot on the Right */
+        /* Mascot Positioning */
         #mascot-container {
-            position: fixed;
-            right:15vw;
-            top: 90%;
-            transform: translateY(-50%);
-            width: 50px;
+            position: absolute;
+            right: 2vw;
+            bottom: 5vh;
+            width: 8vw;
         }
 
         #mascot-img {
@@ -125,68 +113,63 @@
             height: auto;
         }
 
-        /* Adjustments for smaller screens */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .info {
-                font-size: 4vw;
-            }
-            .data {
-                font-size: 6vw;
-            }
-            .button {
-                font-size: 4vw;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .info {
-                font-size: 5vw;
-            }
-            .data {
-                font-size: 7vw;
-            }
-            .button {
-                font-size: 5vw;
-            }
             #date, #time {
                 font-size: 4vw;
             }
+
+            .info {
+                font-size: 5vw;
+            }
+
+            .data {
+                font-size: 6vw;
+            }
+
+            .button {
+                width: 10vw;
+                height: 10vw;
+                font-size: 5vw;
+            }
+
             #mascot-container {
-                width: 100px;
+                width: 12vw;
             }
         }
-
     </style>
 </head>
 <body>
 
-    <!-- Date, Logo, and Time in a single row -->
+    <!-- Header Section -->
     <div id="heading-container">
         <span id="date">Loading...</span>
         <img id="heading-img" src="images/Group 4327.png" alt="Revamp Moto Logo">
         <span id="time">Loading...</span>
     </div>
 
+    <!-- Main Data Section -->
     <div class="container">
         <p class="info">Production Target: <br><span class="data" id="target">Loading...</span></p>
         <p class="info">
             Today's Count: <br>
-            <button class="button decrease" onclick="decrementCount()">−</button>
+            <button class="button" onclick="decrementCount()">−</button>
             <span class="data" id="todayCount">Loading...</span>
-            <button class="button increase" onclick="incrementCount()">+</button>
+            <button class="button" onclick="incrementCount()">+</button>
         </p>
         <p class="info">Total Count: <br><span class="data" id="totalCount">Loading...</span></p>
     </div>
 
-    <!-- Vertical Mascot -->
+    <!-- Mascot -->
     <div id="mascot-container">
         <img id="mascot-img" src="images/RemoxNandan.png" alt="Mascot">
     </div>
 
+    <!-- JavaScript -->
     <script>
         const sheetURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec"; 
-        const increaseURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec?action=increment";
-        const decreaseURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec?action=decrement";
+        const increaseURL = sheetURL + "?action=increment";
+        const decreaseURL = sheetURL + "?action=decrement";
 
         function updateTime() {
             let now = new Date();
@@ -233,3 +216,4 @@
 
 </body>
 </html>
+
