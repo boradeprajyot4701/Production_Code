@@ -1,0 +1,127 @@
+@import url('https://fonts.cdnfonts.com/css/eurostile');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Eurostile', sans-serif;
+    background-color: #1E1E1E;
+    color: white;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.container {
+    width: 1720px;
+    height: 880px;
+    padding: 100px;
+    background-color: #1E1E1E;
+    text-align: center;
+}
+
+.logo {
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.date-time-container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 800px;
+    font-size: 4vw;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#date {
+    color: lightgreen;
+    text-align: left;
+}
+
+#time {
+    color: lightgreen;
+    text-align: right;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mascot {
+    width: 250px;
+    margin-right: 50px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+}
+
+.btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn img {
+    width: 50px;
+}
+
+.count {
+    font-size: 48px;
+    margin: 0 20px;
+    color: #FFD323;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px red, -2px -2px 4px red, 2px -2px 4px red, -2px 2px 4px red;
+}
+
+.info-container {
+    margin-top: 20px;
+}
+
+.info {
+    font-size: 6vw;
+    margin: 3vh 0;
+}
+
+.data {
+    font-size: 8vw;
+    font-weight: bold;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .date-time-container {
+        font-size: 5vw;
+        width: 100%;
+        padding: 0 5vw;
+    }
+    .info {
+        font-size: 8vw;
+    }
+    .data {
+        font-size: 10vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .info {
+        font-size: 10vw;
+    }
+    .data {
+        font-size: 12vw;
+    }
+}
