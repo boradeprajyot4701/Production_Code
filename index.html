@@ -19,12 +19,12 @@
             color: white;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            align-items: flex-start;
+            justify-content: flex-start;
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            padding: 20px;
+            padding: 5vh 5vw;
         }
 
         /* Header */
@@ -57,9 +57,9 @@
             max-width: 1200px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+            justify-content: flex-start;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .info {
@@ -67,8 +67,10 @@
             margin: 3vh 0;
             display: flex;
             align-items: center;
+            justify-content: flex-start;
             gap: 2vw;
             flex-wrap: wrap;
+            width: 100%;
         }
 
         .data {
@@ -76,7 +78,7 @@
             font-weight: bold;
             color: #FFD323;
             min-width: 10vw;
-            text-align: center;
+            text-align: left;
         }
 
         /* Button Styling */
@@ -154,7 +156,7 @@
 
     <!-- Main Data Section -->
     <div class="container">
-        <p class="info">Production Target: <br><span class="data" id="target">Loading...</span></p>
+        <p class="info">Production Target: <span class="data" id="target">Loading...</span></p>
         
         <p class="info">
             <span>Today's Count:</span>
@@ -163,7 +165,7 @@
             <button class="button" onclick="incrementCount()">+</button>
         </p>
 
-        <p class="info">Total Count: <br><span class="data" id="totalCount">Loading...</span></p>
+        <p class="info">Total Count: <span class="data" id="totalCount">Loading...</span></p>
     </div>
 
     <!-- Mascot (Larger) -->
@@ -222,3 +224,4 @@
 
 </body>
 </html>
+
