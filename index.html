@@ -18,7 +18,7 @@
             text-align: center;
             background-color: #1E1E1E;
             color: white;
-            display: #FFD323;
+            display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -29,15 +29,23 @@
         }
 
         /* Styling for the heading image */
+        #heading-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 800px;
+        }
+
         #heading-img {
             width: 60%;
             max-width: 500px;
-            margin-bottom: 20px;
         }
 
         .date-time-container {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             width: 90%;
             max-width: 800px;
             font-size: 4vw;
@@ -96,7 +104,7 @@
         }
 
         .increase:hover {
-            background-color:#FFD323;
+            background-color: #FFD323;
             color: white;
         }
 
@@ -136,7 +144,6 @@
                 font-size: 5vw;
                 width: 100%;
                 padding: 0 5vw;
-                
             }
         }
 
@@ -144,17 +151,15 @@
 </head>
 <body>
 
-    <!-- Replacing text heading with an image -->
-    <img id="heading-img" src="images/Group 4327.png" alt="Revamp Moto Logo">
-
-    <div class="date-time-container">
-        
+    <!-- Date, Logo, and Time in a single row -->
+    <div id="heading-container">
         <span id="date">Loading...</span>
+        <img id="heading-img" src="images/Group 4327.png" alt="Revamp Moto Logo">
         <span id="time">Loading...</span>
     </div>
 
     <div class="container">
-        <p class="info">Prod. Target: <span class="data" id="target">Loading...</span></p>
+        <p class="info">Production Target: <span class="data" id="target">Loading...</span></p>
         <p class="info">
             Today's Count: 
             <button class="button decrease" onclick="decrementCount()">−</button>
@@ -214,3 +219,4 @@
 
 </body>
 </html>
+
