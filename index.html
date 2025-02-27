@@ -15,12 +15,11 @@
 
         body {
             font-family: 'Eurostile', sans-serif;
-            text-align: center;
             background-color: #1E1E1E;
             color: white;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
             height: 100vh;
             width: 100vw;
             flex-direction: column;
@@ -28,13 +27,14 @@
             padding: 20px;
         }
 
-        /* Styling for the heading image */
+        /* Header with Date, Logo, and Time */
         #heading-container {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 90%;
             max-width: 800px;
+            margin-bottom: 20px;
         }
 
         #heading-img {
@@ -42,52 +42,46 @@
             max-width: 500px;
         }
 
-        .date-time-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 90%;
-            max-width: 800px;
-            font-size: 7vw;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
         #date, #time {
             color: #FFD323;
+            font-size: 2vw;
+            font-weight: bold;
         }
 
+        /* Main Container aligned left */
         .container {
             background: #1e1e1e;
             padding: 5vh;
             border-radius: 15px;
-            width: 100%;
-            max-width: 90%;
+            width: 90%;
+            max-width: 800px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
         }
 
         .info {
-            font-size: 6vw;
-            margin: 3vh 0;
+            font-size: 2vw;
+            margin: 2vh 0;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 2vw;
+            width: 100%;
         }
 
         .data {
-            font-size: 8vw;
+            font-size: 4vw;
             font-weight: bold;
             color: #FFD323;
+            display: block;
         }
 
         .button {
-            width: 6vw;
-            height: 6vw;
-            font-size: 4vw;
+            width: 4vw;
+            height: 4vw;
+            font-size: 2vw;
             font-weight: bold;
             color: white;
             background-color: transparent;
@@ -117,33 +111,48 @@
             color: white;
         }
 
+        /* Vertical Mascot on the Right */
+        #mascot-container {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 150px;
+        }
+
+        #mascot-img {
+            width: 100%;
+            height: auto;
+        }
+
         /* Adjustments for smaller screens */
         @media (max-width: 768px) {
             .info {
-                font-size: 8vw;
+                font-size: 4vw;
             }
             .data {
-                font-size: 10vw;
+                font-size: 6vw;
             }
             .button {
-                font-size: 6vw;
+                font-size: 4vw;
             }
         }
 
         @media (max-width: 480px) {
             .info {
-                font-size: 10vw;
+                font-size: 5vw;
             }
             .data {
-                font-size: 12vw;
-            }
-            .button {
                 font-size: 7vw;
             }
-            .date-time-container {
+            .button {
                 font-size: 5vw;
-                width: 100%;
-                padding: 0 5vw;
+            }
+            #date, #time {
+                font-size: 4vw;
+            }
+            #mascot-container {
+                width: 100px;
             }
         }
 
@@ -159,14 +168,19 @@
     </div>
 
     <div class="container">
-        <p class="info">Production Target: <span class="data" id="target">Loading...</span></p>
+        <p class="info">Production Target: <br><span class="data" id="target">Loading...</span></p>
         <p class="info">
-            Today's Count: 
+            Today's Count: <br>
             <button class="button decrease" onclick="decrementCount()">−</button>
             <span class="data" id="todayCount">Loading...</span>
             <button class="button increase" onclick="incrementCount()">+</button>
         </p>
-        <p class="info">Total Count: <span class="data" id="totalCount">Loading...</span></p>
+        <p class="info">Total Count: <br><span class="data" id="totalCount">Loading...</span></p>
+    </div>
+
+    <!-- Vertical Mascot -->
+    <div id="mascot-container">
+        <img id="mascot-img" src="images/mascot.png" alt="Mascot">
     </div>
 
     <script>
@@ -219,4 +233,3 @@
 
 </body>
 </html>
-
