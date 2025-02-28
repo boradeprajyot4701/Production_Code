@@ -105,16 +105,14 @@
             color: #FFD323;
         }
 
-        /* Fix: Mascot Visibility on TV */
+        /* ✅ Fixed Mascot Position */
         #mascot-container {
             position: absolute;
-            right: 5vw;
-            bottom: 5vh;
-            width: 30vw;
-            height: 70vh;
-            max-width: none;
-            max-height: none;
-            z-index: 10;
+            right: 1vw;  /* ✅ Moved further right */
+            bottom: 12vh; /* ✅ Moved higher */
+            width: 22vw;  /* ✅ Reduced width */
+            height: 50vh; /* ✅ Reduced height */
+            z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -123,11 +121,11 @@
         #mascot-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
         }
 
-        /* Responsive Adjustments */
+        /* ✅ Responsive Fixes */
         @media (max-width: 768px) {
             #date, #time {
                 font-size: 4vw;
@@ -148,8 +146,10 @@
             }
 
             #mascot-container {
-                width: 40vw;
-                height: 80vh;
+                width: 35vw;  /* Bigger mascot on smaller screens */
+                height: 60vh;
+                right: 5vw;   /* Adjust position */
+                bottom: 5vh;
             }
         }
     </style>
@@ -177,7 +177,7 @@
         <p class="info">Total Count: <br><span class="data" id="totalCount">Loading...</span></p>
     </div>
 
-    <!-- Mascot (Fixed) -->
+    <!-- ✅ Fixed Mascot -->
     <div id="mascot-container">
         <img id="mascot-img" src="images/RemoxNandan.png" alt="Mascot">
     </div>
@@ -205,6 +205,7 @@
                 document.getElementById("target").innerText = data.target;
                 document.getElementById("totalCount").innerText = data.totalCount;
 
+                // ✅ Prevent past value flashes
                 if (parseInt(document.getElementById("todayCount").innerText) !== data.todayCount) {
                     todayCount = data.todayCount;
                     document.getElementById("todayCount").innerText = todayCount;
@@ -242,3 +243,4 @@
 
 </body>
 </html>
+
