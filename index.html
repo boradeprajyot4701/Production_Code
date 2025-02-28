@@ -61,7 +61,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            z-index: 2; /* Ensuring it's above mascot */
+            z-index: 2;
         }
 
         .info {
@@ -96,7 +96,8 @@
             align-items: center;
             justify-content: center;
             transition: 0.3s;
-            user-select: none; /* Prevents accidental text selection */
+            user-select: none;
+            touch-action: manipulation;
         }
 
         .button:active {
@@ -106,19 +107,24 @@
 
         /* Fix: Mascot Visibility on TV */
         #mascot-container {
-            position: fixed;
-            right: 2vw;
+            position: absolute;
+            right: 5vw;
             bottom: 5vh;
             width: 30vw;
             height: 70vh;
-            z-index: 1; /* Keep it behind the main content */
+            max-width: none;
+            max-height: none;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #mascot-img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            display: block; /* Ensure it's visible */
+            object-fit: cover;
+            display: block;
         }
 
         /* Responsive Adjustments */
@@ -143,7 +149,7 @@
 
             #mascot-container {
                 width: 40vw;
-                height: 80vh; /* Adjust for smaller screens */
+                height: 80vh;
             }
         }
     </style>
@@ -177,61 +183,62 @@
     </div>
 
     <!-- JavaScript -->
- <script>
-    const sheetURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec"; 
-    const increaseURL = sheetURL + "?action=increment";
-    const decreaseURL = sheetURL + "?action=decrement";
-    
-    let pauseFetch = false; // Prevents overwriting of new value
+    <script>
+        const sheetURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec"; 
+        const increaseURL = sheetURL + "?action=increment";
+        const decreaseURL = sheetURL + "?action=decrement";
 
-    function updateTime() {
-        let now = new Date();
-        let options = { day: 'numeric', month: 'long', year: 'numeric' };
-        document.getElementById("time").innerText = now.toLocaleTimeString();
-        document.getElementById("date").innerText = now.toLocaleDateString(undefined, options);
-    }
+        let todayCount = 0;
 
-    async function fetchSheetData() {
-        if (pauseFetch) return; // Stop fetching when user just clicked a button
-
-        try {
-            let response = await fetch(sheetURL);
-            let data = await response.json();
-            document.getElementById("target").innerText = data.target;
-            document.getElementById("todayCount").innerText = data.todayCount;
-            document.getElementById("totalCount").innerText = data.totalCount;
-        } catch (error) {
-            console.error("Error fetching data:", error);
+        function updateTime() {
+            let now = new Date();
+            let options = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById("time").innerText = now.toLocaleTimeString();
+            document.getElementById("date").innerText = now.toLocaleDateString(undefined, options);
         }
-    }
 
-    async function incrementCount() {
-        let todayCount = document.getElementById("todayCount");
-        todayCount.innerText = parseInt(todayCount.innerText) + 1; // Update UI instantly
-        
-        pauseFetch = true; // Stop fetching for a while
-        setTimeout(() => { pauseFetch = false; fetchSheetData(); }, 2000); // Resume after 2 sec
-        
-        try { await fetch(increaseURL); } 
-        catch (error) { console.error("Error updating count:", error); }
-    }
+        async function fetchSheetData() {
+            try {
+                let response = await fetch(sheetURL);
+                let data = await response.json();
+                
+                document.getElementById("target").innerText = data.target;
+                document.getElementById("totalCount").innerText = data.totalCount;
 
-    async function decrementCount() {
-        let todayCount = document.getElementById("todayCount");
-        todayCount.innerText = parseInt(todayCount.innerText) - 1; // Update UI instantly
-        
-        pauseFetch = true; // Stop fetching for a while
-        setTimeout(() => { pauseFetch = false; fetchSheetData(); }, 2000); // Resume after 2 sec
-        
-        try { await fetch(decreaseURL); } 
-        catch (error) { console.error("Error decreasing count:", error); }
-    }
+                if (parseInt(document.getElementById("todayCount").innerText) !== data.todayCount) {
+                    todayCount = data.todayCount;
+                    document.getElementById("todayCount").innerText = todayCount;
+                }
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
 
-    setInterval(updateTime, 500);
-    setInterval(fetchSheetData, 500);
-    fetchSheetData();
-    updateTime();
-  </script>
+        async function incrementCount() {
+            try {
+                todayCount += 1;
+                document.getElementById("todayCount").innerText = todayCount;
+                await fetch(increaseURL);
+            } catch (error) {
+                console.error("Error updating count:", error);
+            }
+        }
+
+        async function decrementCount() {
+            try {
+                todayCount -= 1;
+                document.getElementById("todayCount").innerText = todayCount;
+                await fetch(decreaseURL);
+            } catch (error) {
+                console.error("Error decreasing count:", error);
+            }
+        }
+
+        setInterval(updateTime, 500);
+        setInterval(fetchSheetData, 2000);
+        fetchSheetData();
+        updateTime();
+    </script>
 
 </body>
 </html>
