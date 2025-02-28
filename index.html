@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revamp Moto Production Dashboard</title>
+    <title>Production Dashboard</title>
     <style>
         @import url('https://fonts.cdnfonts.com/css/eurostile');
 
@@ -11,128 +11,178 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family:  'Eurostile', sans-serif;
         }
 
         body {
-            background-color: #000;
+            font-family: 'Eurostile', sans-serif;
+            background-color: #1E1E1E;
             color: white;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            padding: 20px;
+            position: relative;
         }
 
+        /* Header */
+        #heading-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1400px;
+            margin-bottom: 30px;
+        }
+
+        #heading-img {
+            width: 30%;
+            max-width: 500px;
+        }
+
+        #date, #time {
+            color: #FFD323;
+            font-size: 2.5vw;
+            font-weight: bold;
+        }
+
+        /* Main Content */
         .container {
-            width: 1720px;
-            height: 880px;
-            padding: 50px;
-            text-align: center;
-        }
-
-        .header {
+            background: #1E1E1E;
+            padding: 5vh;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1200px;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 28px;
-            margin-bottom: 40px;
-        }
-
-        .logo {
-            width: 300px;
-        }
-
-        .date-time {
-            color: #FFD323;
-            font-weight: bold;
-            font-size: 32px;
-        }
-
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 36px;
-            margin-bottom: 40px;
-        }
-
-        .stats span {
-            color: #FFD323;
-            font-weight: bold;
-        }
-
-        .count-section {
-            text-align: center;
-            font-size: 42px;
-        }
-
-        .count {
-            font-size: 64px;
-            font-weight: bold;
-            color: #FFD323;
-            min-width: 180px;
-            display: inline-block;
-        }
-
-        .controls {
-            display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            gap: 40px;
+            align-items: center;
+            text-align: center;
+            z-index: 2;
         }
 
-        .btn {
-            background: #222;
+        .info {
+            font-size: 2.5vw;
+            margin: 3vh 0;
+            display: flex;
+            align-items: center;
+            gap: 2vw;
+            flex-wrap: wrap;
+        }
+
+        .data {
+            font-size: 5vw;
+            font-weight: bold;
+            color: #FFD323;
+            min-width: 10vw;
+            text-align: center;
+        }
+
+        /* Button Styling */
+        .button {
+            width: 6vw;
+            height: 6vw;
+            font-size: 3vw;
+            font-weight: bold;
+            color: white;
+            background-color: #FFD323;
             border-radius: 50%;
-            width: 80px;
-            height: 80px;
+            border: none;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            border: none;
             transition: 0.3s;
+            user-select: none;
+            touch-action: manipulation;
         }
 
-        .btn:hover {
-            background: #444;
+        .button:active {
+            background-color: white;
+            color: #FFD323;
         }
 
-        .btn img {
-            width: 40px;
+        /* Fix: Mascot Visibility on TV */
+        #mascot-container {
+            position: absolute;
+            right: 5vw;
+            bottom: 5vh;
+            width: 30vw;
+            height: 70vh;
+            max-width: none;
+            max-height: none;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .mascot {
-            width: 300px;
-            margin-top: 40px;
+        #mascot-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            #date, #time {
+                font-size: 4vw;
+            }
+
+            .info {
+                font-size: 5vw;
+            }
+
+            .data {
+                font-size: 6vw;
+            }
+
+            .button {
+                width: 10vw;
+                height: 10vw;
+                font-size: 5vw;
+            }
+
+            #mascot-container {
+                width: 40vw;
+                height: 80vh;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
-            <div class="date-time" id="currentDate">Loading...</div>
-            <img src="images/Group 4327.png" alt="Revamp Moto Logo" class="logo">
-            <div class="date-time" id="currentTime">Loading...</div>
-        </div>
-
-        <div class="stats">
-            <div>Production Target: <span id="targetValue">Loading...</span> Units/Day</div>
-            <div>Total Count: <span id="totalValue">Loading...</span> Units</div>
-        </div>
-
-        <div class="count-section">
-            <p>Today's Count:</p>
-            <div class="controls">
-                <button class="btn" id="decrementBtn"><img src="images/ic_round-minus.svg" alt="Minus"></button>
-                <span class="count" id="todayValue">Loading...</span>
-                <button class="btn" id="incrementBtn"><img src="images/ic_round-plus.svg" alt="Plus"></button>
-            </div>
-        </div>
-
-        <img src="images/RemoxNandan.png" alt="Mascot" class="mascot">
+    <!-- Header Section -->
+    <div id="heading-container">
+        <span id="date">Loading...</span>
+        <img id="heading-img" src="images/Group 4327.png" alt="Revamp Moto Logo">
+        <span id="time">Loading...</span>
     </div>
 
+    <!-- Main Data Section -->
+    <div class="container">
+        <p class="info">Production Target: <br><span class="data" id="target">Loading...</span></p>
+        
+        <p class="info">
+            <span>Today's Count:</span>
+            <button class="button" onclick="decrementCount()">−</button>
+            <span class="data" id="todayCount">Loading...</span>
+            <button class="button" onclick="incrementCount()">+</button>
+        </p>
+
+        <p class="info">Total Count: <br><span class="data" id="totalCount">Loading...</span></p>
+    </div>
+
+    <!-- Mascot (Fixed) -->
+    <div id="mascot-container">
+        <img id="mascot-img" src="images/RemoxNandan.png" alt="Mascot">
+    </div>
+
+    <!-- JavaScript -->
     <script>
         const sheetURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec"; 
         const increaseURL = sheetURL + "?action=increment";
@@ -143,8 +193,8 @@
         function updateTime() {
             let now = new Date();
             let options = { day: 'numeric', month: 'long', year: 'numeric' };
-            document.getElementById("currentTime").innerText = now.toLocaleTimeString();
-            document.getElementById("currentDate").innerText = now.toLocaleDateString(undefined, options);
+            document.getElementById("time").innerText = now.toLocaleTimeString();
+            document.getElementById("date").innerText = now.toLocaleDateString(undefined, options);
         }
 
         async function fetchSheetData() {
@@ -152,35 +202,40 @@
                 let response = await fetch(sheetURL);
                 let data = await response.json();
                 
-                document.getElementById("targetValue").innerText = data.target;
-                document.getElementById("totalValue").innerText = data.totalCount;
+                document.getElementById("target").innerText = data.target;
+                document.getElementById("totalCount").innerText = data.totalCount;
 
-                todayCount = data.todayCount;
-                document.getElementById("todayValue").innerText = todayCount + " Units";
+                if (parseInt(document.getElementById("todayCount").innerText) !== data.todayCount) {
+                    todayCount = data.todayCount;
+                    document.getElementById("todayCount").innerText = todayCount;
+                }
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
         }
 
         async function incrementCount() {
-            todayCount += 1;
-            document.getElementById("todayValue").innerText = todayCount + " Units";
-            await fetch(increaseURL);
-        }
-
-        async function decrementCount() {
-            if (todayCount > 0) {
-                todayCount -= 1;
-                document.getElementById("todayValue").innerText = todayCount + " Units";
-                await fetch(decreaseURL);
+            try {
+                todayCount += 1;
+                document.getElementById("todayCount").innerText = todayCount;
+                await fetch(increaseURL);
+            } catch (error) {
+                console.error("Error updating count:", error);
             }
         }
 
-        document.getElementById("incrementBtn").addEventListener("click", incrementCount);
-        document.getElementById("decrementBtn").addEventListener("click", decrementCount);
+        async function decrementCount() {
+            try {
+                todayCount -= 1;
+                document.getElementById("todayCount").innerText = todayCount;
+                await fetch(decreaseURL);
+            } catch (error) {
+                console.error("Error decreasing count:", error);
+            }
+        }
 
-        setInterval(updateTime, 1000);
-        setInterval(fetchSheetData, 5000);
+        setInterval(updateTime, 500);
+        setInterval(fetchSheetData, 2000);
         fetchSheetData();
         updateTime();
     </script>
