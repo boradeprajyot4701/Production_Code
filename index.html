@@ -58,27 +58,50 @@
             max-width: 1200px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
             z-index: 2;
+            position: relative;
         }
 
-        .info {
-            font-size: 2.5vw;
-            margin: 3vh 0;
+        /* Target & Total Inline */
+        .info-top {
             display: flex;
+            justify-content: space-around;
+            width: 100%;
+            font-size: 2.5vw;
+            margin-bottom: 3vh;
+        }
+
+        .info-top .info-item {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 2vw;
-            flex-wrap: wrap;
+            width: 45%;
         }
 
         .data {
             font-size: 5vw;
             font-weight: bold;
             color: #FFD323;
-            min-width: 10vw;
-            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Today's Count at Bottom Left */
+        #today-container {
+            position: absolute;
+            bottom: 2vh;
+            left: 3vw;
+            font-size: 3vw;
+            display: flex;
+            align-items: center;
+            gap: 2vw;
+        }
+
+        #todayCount {
+            font-size: 6vw;
+            font-weight: bold;
+            color: #FFD323;
         }
 
         /* Button Styling */
@@ -105,16 +128,14 @@
             color: #FFD323;
         }
 
-        /* Fix: Mascot Visibility on TV */
+        /* ✅ Fixed Mascot Position */
         #mascot-container {
             position: absolute;
-            right: 5vw;
-            bottom: 5vh;
-            width: 30vw;
-            height: 70vh;
-            max-width: none;
-            max-height: none;
-            z-index: 10;
+            right: 1vw;
+            bottom: 12vh;
+            width: 22vw;
+            height: 50vh;
+            z-index: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -123,22 +144,34 @@
         #mascot-img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             display: block;
         }
 
-        /* Responsive Adjustments */
+        /* ✅ Responsive Fixes */
         @media (max-width: 768px) {
             #date, #time {
                 font-size: 4vw;
             }
 
-            .info {
+            .info-top {
+                flex-direction: column;
+                align-items: center;
                 font-size: 5vw;
             }
 
             .data {
                 font-size: 6vw;
+            }
+
+            #today-container {
+                bottom: 5vh;
+                left: 5vw;
+                font-size: 5vw;
+            }
+
+            #todayCount {
+                font-size: 8vw;
             }
 
             .button {
@@ -148,8 +181,10 @@
             }
 
             #mascot-container {
-                width: 40vw;
-                height: 80vh;
+                width: 35vw;
+                height: 60vh;
+                right: 5vw;
+                bottom: 5vh;
             }
         }
     </style>
@@ -165,19 +200,28 @@
 
     <!-- Main Data Section -->
     <div class="container">
-        <p class="info">Production Target: <br><span class="data" id="target">Loading...</span></p>
-        
-        <p class="info">
+        <!-- Target & Total Count Inline -->
+        <div class="info-top">
+            <div class="info-item">
+                <span>Production Target:</span>
+                <span class="data" id="target">Loading...</span>
+            </div>
+            <div class="info-item">
+                <span>Total Count:</span>
+                <span class="data" id="totalCount">Loading...</span>
+            </div>
+        </div>
+
+        <!-- Today's Count at Bottom Left -->
+        <div id="today-container">
             <span>Today's Count:</span>
             <button class="button" onclick="decrementCount()">−</button>
-            <span class="data" id="todayCount">Loading...</span>
+            <span id="todayCount">Loading...</span>
             <button class="button" onclick="incrementCount()">+</button>
-        </p>
-
-        <p class="info">Total Count: <br><span class="data" id="totalCount">Loading...</span></p>
+        </div>
     </div>
 
-    <!-- Mascot (Fixed) -->
+    <!-- ✅ Fixed Mascot -->
     <div id="mascot-container">
         <img id="mascot-img" src="images/RemoxNandan.png" alt="Mascot">
     </div>
@@ -234,8 +278,8 @@
             }
         }
 
-        setInterval(updateTime, 500);
-        setInterval(fetchSheetData, 2000);
+        setInterval(updateTime, 100);
+        setInterval(fetchSheetData, 100);
         fetchSheetData();
         updateTime();
     </script>
