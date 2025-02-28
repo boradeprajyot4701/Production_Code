@@ -33,46 +33,46 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            width: 90%;
-            max-width: 1400px;
-            margin-bottom: 30px;
+            width: 95%;
+            max-width: 1600px;
+            margin-bottom: 50px;
         }
 
         #heading-img {
-            width: 30%;
-            max-width: 500px;
+            width: 35%;
+            max-width: 600px;
         }
 
         #date, #time {
             color: #FFD323;
-            font-size: 2.5vw;
+            font-size: 4vw; /* Increased for TV */
             font-weight: bold;
         }
 
         /* Main Content */
         .container {
             background: #1E1E1E;
-            padding: 5vh;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 1200px;
+            padding: 6vh;
+            border-radius: 20px;
+            width: 95%;
+            max-width: 1500px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;  /* Align everything to the left */
+            align-items: flex-start;
             text-align: left;
             z-index: 2;
             position: relative;
         }
 
-        /* Target & Total Inline (Moved to Left) */
+        /* Target & Total Inline (Left Aligned) */
         .info-top {
             display: flex;
-            justify-content: flex-start;  /* Move everything to the left */
+            justify-content: flex-start;
             width: 100%;
-            font-size: 2.5vw;
-            margin-bottom: 10vh; /* Increased gap */
-            padding-left: 3vw; /* Shifted more left */
-            gap: 10vw; /* Maintain equal spacing between them */
+            font-size: 4vw; /* Bigger text */
+            margin-bottom: 12vh;
+            padding-left: 4vw;
+            gap: 12vw;
         }
 
         .info-item {
@@ -82,34 +82,34 @@
         }
 
         .data {
-            font-size: 5vw;
+            font-size: 7vw; /* Larger number text */
             font-weight: bold;
             color: #FFD323;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         /* Today's Count at Bottom Left */
         #today-container {
             position: absolute;
-            bottom: 2vh;
-            left: 3vw;
-            font-size: 3vw;
+            bottom: 4vh;
+            left: 5vw;
+            font-size: 4vw;
             display: flex;
             align-items: center;
-            gap: 2vw;
+            gap: 3vw;
         }
 
         #todayCount {
-            font-size: 6vw;
+            font-size: 8vw; /* Bigger number */
             font-weight: bold;
             color: #FFD323;
         }
 
         /* Button Styling */
         .button {
-            width: 6vw;
-            height: 6vw;
-            font-size: 3vw;
+            width: 8vw;
+            height: 8vw;
+            font-size: 4vw;
             font-weight: bold;
             color: white;
             background-color: #FFD323;
@@ -132,10 +132,10 @@
         /* ✅ Fixed Mascot Position */
         #mascot-container {
             position: absolute;
-            right: 1vw;
-            bottom: 12vh;
-            width: 22vw;
-            height: 50vh;
+            right: 2vw;
+            bottom: 10vh;
+            width: 25vw;
+            height: 55vh;
             z-index: 1;
             display: flex;
             justify-content: center;
@@ -150,42 +150,42 @@
         }
 
         /* ✅ Responsive Fixes */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             #date, #time {
-                font-size: 4vw;
+                font-size: 5vw;
             }
 
             .info-top {
                 flex-direction: column;
                 align-items: flex-start;
-                font-size: 5vw;
-            }
-
-            .data {
                 font-size: 6vw;
             }
 
+            .data {
+                font-size: 8vw;
+            }
+
             #today-container {
-                bottom: 5vh;
-                left: 5vw;
-                font-size: 5vw;
+                bottom: 6vh;
+                left: 6vw;
+                font-size: 6vw;
             }
 
             #todayCount {
-                font-size: 8vw;
+                font-size: 9vw;
             }
 
             .button {
                 width: 10vw;
                 height: 10vw;
-                font-size: 5vw;
+                font-size: 6vw;
             }
 
             #mascot-container {
-                width: 35vw;
+                width: 30vw;
                 height: 60vh;
-                right: 5vw;
-                bottom: 5vh;
+                right: 6vw;
+                bottom: 6vh;
             }
         }
     </style>
