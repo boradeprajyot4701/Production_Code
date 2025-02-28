@@ -67,17 +67,27 @@
         /* Target & Total Inline */
         .info-top {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             width: 100%;
             font-size: 2.5vw;
-            margin-bottom: 3vh;
+            margin-bottom: 10vh; /* Increased gap */
+            padding: 0 5vw; /* Added spacing */
         }
 
-        .info-top .info-item {
+        .info-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 45%;
+        }
+
+        /* Move Production Target more left */
+        .info-item:first-child {
+            margin-left: -5vw; /* Move further left */
+        }
+
+        /* Move Total Count slightly left */
+        .info-item:last-child {
+            margin-left: -2vw; /* Shift slightly left */
         }
 
         .data {
@@ -259,23 +269,15 @@
         }
 
         async function incrementCount() {
-            try {
-                todayCount += 1;
-                document.getElementById("todayCount").innerText = todayCount;
-                await fetch(increaseURL);
-            } catch (error) {
-                console.error("Error updating count:", error);
-            }
+            todayCount += 1;
+            document.getElementById("todayCount").innerText = todayCount;
+            await fetch(increaseURL);
         }
 
         async function decrementCount() {
-            try {
-                todayCount -= 1;
-                document.getElementById("todayCount").innerText = todayCount;
-                await fetch(decreaseURL);
-            } catch (error) {
-                console.error("Error decreasing count:", error);
-            }
+            todayCount -= 1;
+            document.getElementById("todayCount").innerText = todayCount;
+            await fetch(decreaseURL);
         }
 
         setInterval(updateTime, 100);
@@ -286,4 +288,3 @@
 
 </body>
 </html>
-
