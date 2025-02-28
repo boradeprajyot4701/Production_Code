@@ -106,31 +106,40 @@
             color: #FFD323;
         }
 
+        /* ✅ Button Container at Bottom-Right */
+        #button-container {
+            position: absolute;
+            bottom: 5vh; /* Adjusted for spacing */
+            right: 5vw; /* Adjusted for spacing */
+            display: flex;
+            gap: 2vw; /* Space between buttons */
+        }
+
         /* Button Styling */
-.button {
-    width: 7vw;
-    height: 7vw;
-    font-size: 4vw;
-    font-weight: bold;
-    color: white;
-    background-color: rgba(255, 211, 35, 0.2); /* Yellow with 20% opacity */
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    user-select: none;
-    touch-action: manipulation;
-}
+        .button {
+            width: 7vw;
+            height: 7vw;
+            font-size: 4vw;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(255, 211, 35, 0.2); /* Yellow with 20% opacity */
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.3s;
+            user-select: none;
+            touch-action: manipulation;
+        }
 
         .button:active {
             background-color: white;
             color: #FFD323;
         }
 
-        /* Responsive Fixes */
+        /* ✅ Responsive Adjustments */
         @media (max-width: 768px) {
             #date, #time {
                 font-size: 5vw;
@@ -154,6 +163,12 @@
 
             #todayCount {
                 font-size: 9vw;
+            }
+
+            #button-container {
+                bottom: 4vh;
+                right: 4vw;
+                gap: 4vw;
             }
 
             .button {
@@ -190,10 +205,14 @@
         <!-- Today's Count -->
         <div id="today-container">
             <span>Today's Count:</span>
-            <button class="button" onclick="decrementCount()">−</button>
             <span id="todayCount">Loading...</span>
-            <button class="button" onclick="incrementCount()">+</button>
         </div>
+    </div>
+
+    <!-- ✅ Button Container at Bottom-Right -->
+    <div id="button-container">
+        <button class="button" onclick="decrementCount()">−</button>
+        <button class="button" onclick="incrementCount()">+</button>
     </div>
 
     <!-- JavaScript -->
