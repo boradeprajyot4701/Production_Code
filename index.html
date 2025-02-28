@@ -6,203 +6,132 @@
     <title>Revamp Moto Production Dashboard</title>
     <style>
         @import url('https://fonts.cdnfonts.com/css/eurostile');
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Eurostile', sans-serif;
+            font-family:  'Eurostile', sans-serif;
         }
-        
+
         body {
-            background-color: #000000;
-            color: #ffffff;
-            height: 100vh;
+            background-color: #000;
+            color: white;
             display: flex;
-            flex-direction: column;
-            padding: 20px;
-            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        
+
+        .container {
+            width: 1720px;
+            height: 880px;
+            padding: 50px;
+            text-align: center;
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 28px;
             margin-bottom: 40px;
         }
-        
-        .date, .time {
-            font-size: 32px;
-            color: #ffd700;
-            font-weight: 500;
-        }
-        
-        .logo-container {
-            text-align: center;
-            flex-grow: 1;
-        }
-        
+
         .logo {
-            max-height: 60px;
+            width: 300px;
         }
-        
-        .dashboard-content {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
+
+        .date-time {
+            color: #FFD323;
+            font-weight: bold;
+            font-size: 32px;
         }
-        
-        .metrics {
+
+        .stats {
             display: flex;
+            justify-content: space-between;
+            font-size: 36px;
             margin-bottom: 40px;
         }
-        
-        .metric {
-            flex: 1;
-        }
-        
-        .metric-label {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .metric-value {
-            font-size: 56px;
+
+        .stats span {
+            color: #FFD323;
             font-weight: bold;
-            color: #ffd700;
         }
-        
-        .today-counter {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+
+        .count-section {
+            text-align: center;
+            font-size: 42px;
         }
-        
-        .counter-label {
-            font-size: 36px;
-            margin-bottom: 20px;
+
+        .count {
+            font-size: 64px;
+            font-weight: bold;
+            color: #FFD323;
+            min-width: 180px;
+            display: inline-block;
         }
-        
-        .counter-container {
+
+        .controls {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 40px;
         }
-        
-        .counter-btn {
-            background-color: #423800;
-            color: #ffd700;
-            border: none;
+
+        .btn {
+            background: #222;
             border-radius: 50%;
             width: 80px;
             height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 42px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            border: none;
+            transition: 0.3s;
         }
-        
-        .counter-btn:hover {
-            background-color: #665600;
+
+        .btn:hover {
+            background: #444;
         }
-        
-        .counter-value {
-            font-size: 80px;
-            font-weight: bold;
-            color: #ffd700;
-            margin: 0 40px;
-            min-width: 200px;
-            text-align: center;
+
+        .btn img {
+            width: 40px;
         }
-        
+
         .mascot {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            height: 200px;
-        }
-        
-        .loading {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0s, opacity 0.3s;
-        }
-        
-        .loading.visible {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .spinner {
-            border: 5px solid #333;
-            border-top: 5px solid #ffd700;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .units-label {
-            font-size: 24px;
-            color: #ffd700;
-            margin-left: 10px;
+            width: 300px;
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
-    <div class="loading" id="loadingIndicator">
-        <div class="spinner"></div>
-    </div>
 
-    <div class="header">
-        <div class="date" id="currentDate">Loading...</div>
-        <div class="logo-container">
-            <img src="images/Group 4327.png" alt="Revamp Moto" class="logo">
+    <div class="container">
+        <div class="header">
+            <div class="date-time" id="currentDate">Loading...</div>
+            <img src="Group 4327.png" alt="Revamp Moto Logo" class="logo">
+            <div class="date-time" id="currentTime">Loading...</div>
         </div>
-        <div class="time" id="currentTime">Loading...</div>
+
+        <div class="stats">
+            <div>Production Target: <span id="targetValue">Loading...</span> Units/Day</div>
+            <div>Total Count: <span id="totalValue">Loading...</span> Units</div>
+        </div>
+
+        <div class="count-section">
+            <p>Today's Count:</p>
+            <div class="controls">
+                <button class="btn" id="decrementBtn"><img src="ic_round-minus.svg" alt="Minus"></button>
+                <span class="count" id="todayValue">Loading...</span>
+                <button class="btn" id="incrementBtn"><img src="ic_round-plus.svg" alt="Plus"></button>
+            </div>
+        </div>
+
+        <img src="RemoxNandan.png" alt="Mascot" class="mascot">
     </div>
-    
-    <div class="dashboard-content">
-        <div class="metrics">
-            <div class="metric">
-                <div class="metric-label">Production Target :</div>
-                <div class="metric-value" id="targetValue">Loading...</div>
-            </div>
-            <div class="metric">
-                <div class="metric-label">Total Count :</div>
-                <div class="metric-value" id="totalValue">Loading...</div>
-            </div>
-        </div>
-        
-        <div class="today-counter">
-            <div class="counter-label">Today's Count :</div>
-            <div class="counter-container">
-                <button class="counter-btn" id="decrementBtn">−</button>
-                <div class="counter-value" id="todayValue">Loading...</div>
-                <button class="counter-btn" id="incrementBtn">+</button>
-            </div>
-            <div class="units-label" style="font-size: 32px; margin-top: 10px;">Units</div>
-        </div>
-    </div>
-    
-    <img src="images/RemoxNandan.png" alt="Mascot" class="mascot">
 
     <script>
         const sheetURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec"; 
@@ -219,32 +148,32 @@
         }
 
         async function fetchSheetData() {
-            document.getElementById("loadingIndicator").classList.add("visible");
             try {
                 let response = await fetch(sheetURL);
                 let data = await response.json();
                 
-                document.getElementById("targetValue").innerHTML = `${data.target} <span class="units-label">Units/Day</span>`;
-                document.getElementById("totalValue").innerHTML = `${data.totalCount} <span class="units-label">Units</span>`;
+                document.getElementById("targetValue").innerText = data.target;
+                document.getElementById("totalValue").innerText = data.totalCount;
 
                 todayCount = data.todayCount;
-                document.getElementById("todayValue").innerText = todayCount;
+                document.getElementById("todayValue").innerText = todayCount + " Units";
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
-            document.getElementById("loadingIndicator").classList.remove("visible");
         }
 
         async function incrementCount() {
             todayCount += 1;
-            document.getElementById("todayValue").innerText = todayCount;
+            document.getElementById("todayValue").innerText = todayCount + " Units";
             await fetch(increaseURL);
         }
 
         async function decrementCount() {
-            todayCount -= 1;
-            document.getElementById("todayValue").innerText = todayCount;
-            await fetch(decreaseURL);
+            if (todayCount > 0) {
+                todayCount -= 1;
+                document.getElementById("todayValue").innerText = todayCount + " Units";
+                await fetch(decreaseURL);
+            }
         }
 
         document.getElementById("incrementBtn").addEventListener("click", incrementCount);
@@ -258,4 +187,3 @@
 
 </body>
 </html>
-
