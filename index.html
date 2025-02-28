@@ -205,108 +205,52 @@
     <img src="images/RemoxNandan.png" alt="Mascot" class="mascot" id="mascotPlaceholder">
     
     <script>
-        // Google Apps Script Web App URL - replace with your published web app URL
-        const scriptURL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
-        
-        // Elements
-        const targetValueEl = document.getElementById('targetValue');
-        const todayValueEl = document.getElementById('todayValue');
-        const totalValueEl = document.getElementById('totalValue');
-        const decrementBtn = document.getElementById('decrementBtn');
-        const incrementBtn = document.getElementById('incrementBtn');
-        const dateEl = document.getElementById('currentDate');
-        const timeEl = document.getElementById('currentTime');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        
-        // Logo and mascot placeholders - replace with your actual images
-        const logoPlaceholder = document.getElementById('logoPlaceholder');
-        const mascotPlaceholder = document.getElementById('mascotPlaceholder');
-        
-        // Functions to update date and time
-        function updateDateTime() {
-            const now = new Date();
-            
-            // Format date: DD MMM, YYYY
-            const options = { day: 'numeric', month: 'short', year: 'numeric' };
-            const formattedDate = now.toLocaleDateString('en-US', options)
-                .replace(',', '').replace(' ', ' ');
-            dateEl.textContent = formattedDate;
-            
-            // Format time: HH:MM:SS AM/PM
-            timeEl.textContent = now.toLocaleTimeString('en-US', { 
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit'
-            });
+        const sheetURL = "https://script.google.com/macros/s/AKfycbwbu4jPsXFZAXnJryuyc2ADUZI2oFMr9i-JmC9OzFV8u8oh8a5y37UI94Z1tf95pzrT/exec"; 
+        const increaseURL = sheetURL + "?action=increment";
+        const decreaseURL = sheetURL + "?action=decrement";
+
+        let todayCount = 0;
+
+        function updateTime() {
+            let now = new Date();
+            let options = { day: 'numeric', month: 'long', year: 'numeric' };
+            document.getElementById("time").innerText = now.toLocaleTimeString();
+            document.getElementById("date").innerText = now.toLocaleDateString(undefined, options);
         }
-        
-        // Function to format numbers with commas
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-        
-        // Function to fetch data from Google Sheets
-        async function fetchData() {
-            showLoading();
+
+        async function fetchSheetData() {
             try {
-                const response = await fetch(scriptURL);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                let response = await fetch(sheetURL);
+                let data = await response.json();
+                
+                document.getElementById("target").innerText = data.target;
+                document.getElementById("totalCount").innerText = data.totalCount;
+
+                if (parseInt(document.getElementById("todayCount").innerText) !== data.todayCount) {
+                    todayCount = data.todayCount;
+                    document.getElementById("todayCount").innerText = todayCount;
                 }
-                const data = await response.json();
-                
-                // Update the UI with fetched data
-                targetValueEl.innerHTML = `${data.target} <span class="units-label">Units/Day</span>`;
-                todayValueEl.textContent = data.todayCount;
-                totalValueEl.innerHTML = `${formatNumber(data.totalCount)} <span class="units-label">Units</span>`;
-                
-                hideLoading();
             } catch (error) {
-                console.error('Error fetching data:', error);
-                hideLoading();
+                console.error("Error fetching data:", error);
             }
         }
-        
-        // Function to update count (increment or decrement)
-        async function updateCount(action) {
-            showLoading();
-            try {
-                await fetch(`${scriptURL}?action=${action}`);
-                fetchData(); // Refresh data after update
-            } catch (error) {
-                console.error('Error updating count:', error);
-                hideLoading();
-            }
+
+        async function incrementCount() {
+            todayCount += 1;
+            document.getElementById("todayCount").innerText = todayCount;
+            await fetch(increaseURL);
         }
-        
-        // Event listeners for increment and decrement buttons
-        decrementBtn.addEventListener('click', () => {
-            updateCount('decrement');
-        });
-        
-        incrementBtn.addEventListener('click', () => {
-            updateCount('increment');
-        });
-        
-        // Loading indicator functions
-        function showLoading() {
-            loadingIndicator.classList.add('visible');
+
+        async function decrementCount() {
+            todayCount -= 1;
+            document.getElementById("todayCount").innerText = todayCount;
+            await fetch(decreaseURL);
         }
-        
-        function hideLoading() {
-            loadingIndicator.classList.remove('visible');
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            // Update date and time immediately and then every second
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
-            
-            // Fetch data immediately and then every 30 seconds
-            fetchData();
-            setInterval(fetchData, 30000);
-        });
+
+        setInterval(updateTime, 100);
+        setInterval(fetchSheetData, 100);
+        fetchSheetData();
+        updateTime();
     </script>
 </body>
 </html>
