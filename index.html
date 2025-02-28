@@ -58,36 +58,27 @@
             max-width: 1200px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
+            align-items: flex-start;  /* Align everything to the left */
+            text-align: left;
             z-index: 2;
             position: relative;
         }
 
-        /* Target & Total Inline */
+        /* Target & Total Inline (Moved to Left) */
         .info-top {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;  /* Move everything to the left */
             width: 100%;
             font-size: 2.5vw;
             margin-bottom: 10vh; /* Increased gap */
-            padding: 0 5vw; /* Added spacing */
+            padding-left: 3vw; /* Shifted more left */
+            gap: 10vw; /* Maintain equal spacing between them */
         }
 
         .info-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
-
-        /* Move Production Target more left */
-        .info-item:first-child {
-            margin-left: -5vw; /* Move further left */
-        }
-
-        /* Move Total Count slightly left */
-        .info-item:last-child {
-            margin-left: -2vw; /* Shift slightly left */
         }
 
         .data {
@@ -166,7 +157,7 @@
 
             .info-top {
                 flex-direction: column;
-                align-items: center;
+                align-items: flex-start;
                 font-size: 5vw;
             }
 
@@ -210,7 +201,7 @@
 
     <!-- Main Data Section -->
     <div class="container">
-        <!-- Target & Total Count Inline -->
+        <!-- Target & Total Count Inline (Moved Left) -->
         <div class="info-top">
             <div class="info-item">
                 <span>Production Target:</span>
